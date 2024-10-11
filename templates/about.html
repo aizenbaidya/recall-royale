@@ -5,5 +5,30 @@
 {% endblock %}
 
 {% block body %}
-    <h1>About</h1>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/about.css') }}">
+<div class="home-container">
+    <h1>Welcome to the Opensource Flashcard Challenge!</h1>
+    <p>Test your skills with our interactive flashcard game! Start with easy problems and work your way up to more challenging ones. Can you conquer all levels?</p>
+    <br>
+    <div class="section">
+        <h2>How to Play</h2>
+        <p>Each flashcard will present a problem from the chosen dataset. Solve enough correctly to move on to the next one. As you progress, the difficulty increases!</p>
+        <p>Once you conquered a level you can move onto the next stage</p>
+        <p>There will be 3 levels you will need to pass through in order to complete a topic</p>
+        <br>
+    </div>
+    <div class="challenge">
+        <h2> About this project </h2>
+        <p> This project was created for the MLH Open Source Hackfest</p>
+        <p> The dataset can be of anytopic so it doesnt need to just be proggramming related topics</p>
+        <p> select from one of our premade datasets or choose one created by your peers</p>
+        <p> help teach others to code by uploading your own dataset of problems </div>
+        <br>
+    </div>
+    <div class="Next Steps">
+        <h2> Next Steps </h2>
+        <p>Add something once we are done with project to show we know what the devlopment plan is</p>
+    </div>
+
+ 
 {% endblock %}
