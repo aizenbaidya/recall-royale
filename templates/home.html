@@ -1,32 +1,37 @@
 {% extends 'base.html' %}
 
 {% block head %}
-    <title>Math Flashcard Game</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>Flashcard Game</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}"> <!-- Link to your CSS file -->
 {% endblock %}
 
 {% block body %}
-    <div class="home-container">
-        <h1>Welcome to the Math Flashcard Challenge!</h1>
-        <p>Test your math skills with our interactive flashcard game! Start with easy problems and work your way up to more challenging ones. Can you conquer all levels?</p>
+    <div class="container">
+        <h1>Welcome to the Flashcard Game!</h1>
+        <p>Choose your subject and test your knowledge with engaging flashcards!</p>
 
-        <div class="section">
-            <h2>Game Levels</h2>
-            <ol>
-                <li><strong>Easy:</strong> Addition & Subtraction</li>
-                <li><strong>Medium:</strong> Multiplication & Division</li>
-                <li><strong>Hard:</strong> Basic Algebra</li>
-            </ol>
+        <h2>About the Project</h2>
+        <p><strong>Flashcard Learning Tool</strong> is an interactive platform that transforms learning into an engaging experience. While it features math flashcards for various difficulty levels, it's designed to support diverse subjects, allowing users to create and share their own content. This open-source project invites collaboration, encouraging a community-driven approach to education. Have fun!</p>
+        
+        <div class="subject-selection">
+            <label for="subjects">Select a Subject:</label>
+            <select id="subjects">
+                <option value="math">Math</option>
+                <option value="science">Science</option>
+                <option value="history">History</option>
+                <option value="language">Language</option>
+            </select>
         </div>
 
-        <div class="section">
-            <h2>How to Play</h2>
-            <p>Each flashcard will present a math problem. Solve it correctly to move on to the next one. As you progress, the difficulty increases!</p>
-            <p>Are you ready to start?</p>
-        </div>
-
-        <div class="section start-button">
-            <a href="/play" class="button">Start Game</a>
+        <div class="button-container">
+            <button onclick="startGame()">Start Game</button>
         </div>
     </div>
 {% endblock %}
+
+<script>
+function startGame() {
+    const subject = document.getElementById('subjects').value;
+    window.location.href = `/play?subject=${subject}`; // Redirect to the play page with the selected subject
+}
+</script>
