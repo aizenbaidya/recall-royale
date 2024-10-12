@@ -72,6 +72,18 @@ def create_app():
 
         return render_template('hq.html')
 
+    @app.route('/play')
+    def play():
+        return render_template('play.html') 
+
+    @app.route('/tutorial')
+    def tutorial():
+        return render_template('tutorial.html') 
+    
+    @app.route('/about')
+    def about():
+        return render_template('about.html')
+    
     @app.route('/problems')
     def problems():
         tables = get_all_tables()
@@ -89,7 +101,6 @@ def create_app():
             ]
         
         return render_template('problems.html', problems_by_table=problems_by_table)
-
 
     return app
 
