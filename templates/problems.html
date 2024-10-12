@@ -6,15 +6,17 @@
 </head>
 <body>
     <h1>Problems List</h1>
-    <ul>
-        {% for problem in problems %}
-            <li>
-                <strong>{{ problem['TITLE'] }}</strong><br>
-                Question: {{ problem['QUESTION'] }}<br>
-                Answer: {{ problem['ANSWER'] }}<br>
-                Difficulty: {{ problem['DIFFICULTY'] }}
-            </li>
-        {% endfor %}
-    </ul>
+    {% for table_name, problems in problems_by_table.items() %}
+        <h2>{{ table_name }}</h2>
+        <ul>
+            {% for problem in problems %}
+                <li>
+                    <strong>Question:</strong> {{ problem['question'] }}<br>
+                    <strong>Answer:</strong> {{ problem['answer'] }}<br>
+                    <strong>Difficulty:</strong> {{ problem['difficulty'] }}
+                </li>
+            {% endfor %}
+        </ul>
+    {% endfor %}
 </body>
 </html>

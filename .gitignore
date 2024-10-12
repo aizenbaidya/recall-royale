@@ -1,1 +1,3 @@
 __pycache__/
+.vscode/
+instance/app_database.db
