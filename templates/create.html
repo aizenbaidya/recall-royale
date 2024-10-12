@@ -6,11 +6,11 @@
 
 {% block body %}
 
-<form id="qaForm" action="/mq" method="POST">
+<form id="qaForm" action="/create" method="POST">
     <div id="title">
         <div class="title"></div>
         <label for="title">Title:</label>
-        <input type="text" id="title" name="title">
+        <input type="text" id="title" name="title" required>
     </div>
 
     <div id="qaContainer">
@@ -18,9 +18,9 @@
         <h2>Easy Questions and Answers</h2>
         <div class="question-answer">
             <label for="question1">Question 1:</label>
-            <input type="text" id="question1" name="question1">
+            <input type="text" id="question1" name="question1" required>
             <label for="answer1">Answer:</label>
-            <input type="text" id="answer1" name="answer1">
+            <input type="text" id="answer1" name="answer1" required>
         </div>
     </div>
     <br>
