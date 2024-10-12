@@ -5,10 +5,10 @@ body {
     background-color: #f4f4f4;
     color: #333;
     margin: 0;
-    /* padding: 20px; */
+
   }
 
-  /* Container for the entire page content */
+
 .home-container {
     max-width: 1200px;
     margin: 0 auto;
@@ -33,7 +33,7 @@ body {
     margin-bottom: 15px;
 }
 
-/* Section specific styling */
+
 .section, .challenge, .next-steps {
     padding: 20px;
     background-color: #ffffff;
@@ -54,7 +54,7 @@ body {
     color: #444;
 }
 
-/* Responsive design */
+
 @media (max-width: 768px) {
     .home-container {
         padding: 15px;

@@ -34,11 +34,11 @@
     function addQuestion() {
         questionCount++;
 
-        // Create new div for the question-answer pair
+        
         const qaDiv = document.createElement('div');
         qaDiv.classList.add('question-answer');
 
-        // Add Question label and input
+       
         const questionLabel = document.createElement('label');
         questionLabel.setAttribute('for', `question${questionCount}`);
         questionLabel.innerText = `Question ${questionCount}:`;
@@ -48,7 +48,7 @@
         questionInput.setAttribute('id', `question${questionCount}`);
         questionInput.setAttribute('name', `question${questionCount}`);
 
-        // Add Answer label and input
+       
         const answerLabel = document.createElement('label');
         answerLabel.setAttribute('for', `answer${questionCount}`);
         answerLabel.innerText = ' Answer:';
@@ -58,13 +58,13 @@
         answerInput.setAttribute('id', `answer${questionCount}`);
         answerInput.setAttribute('name', `answer${questionCount}`);
 
-        // Append everything to the div
+      
         qaDiv.appendChild(questionLabel);
         qaDiv.appendChild(questionInput);
         qaDiv.appendChild(answerLabel);
         qaDiv.appendChild(answerInput);
 
-        // Append the new div to the container
+      
         const qaContainer = document.getElementById('qaContainer');
         qaContainer.appendChild(qaDiv);
     }
