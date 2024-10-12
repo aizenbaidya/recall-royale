@@ -46,6 +46,7 @@ body {
     font-size: 1.8em;
     color: #222;
     margin-bottom: 10px;
+    text-align: center;
 }
 
 .challenge p, .section p, .next-steps p {

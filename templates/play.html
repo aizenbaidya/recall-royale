@@ -2,10 +2,19 @@
 
 {% block head %}
 <title>Play</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/play.css') }}">
 {% endblock %}
 
 {% block body %}
-<div class="container">
-    <h1>Welcome to the Play Page</h1>
+<div class="flashcard">
+    <div class="flashcard-inner">
+        <div class="flashcard-front">
+            1+1
+        </div>
+        <div class="flashcard-back">
+            2
+        </div>
+    </div>
 </div>
+
 {% endblock %}
