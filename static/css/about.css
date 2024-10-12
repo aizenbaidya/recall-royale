@@ -34,7 +34,7 @@ body {
 }
 
 /* Section specific styling */
-.section, .challenge, .Next\ Steps {
+.section, .challenge, .next-steps {
     padding: 20px;
     background-color: #ffffff;
     margin-bottom: 20px;
@@ -42,13 +42,13 @@ body {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.section h2, .challenge h2, .Next\ Steps h2 {
+.section h2, .challenge h2, .next-steps h2 {
     font-size: 1.8em;
     color: #222;
     margin-bottom: 10px;
 }
 
-.challenge p, .section p, .Next\ Steps p {
+.challenge p, .section p, .next-steps p {
     font-size: 1em;
     color: #444;
 }
@@ -63,7 +63,7 @@ body {
         font-size: 2em;
     }
     
-    .section, .challenge, .Next\ Steps {
+    .section, .challenge, .next-steps {
         padding: 15px;
     }
 }
