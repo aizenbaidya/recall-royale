@@ -7,22 +7,65 @@ body {
     margin: 0;
     /* padding: 20px; */
   }
-  
-  .container {
-    max-width: 600px;
-    margin: auto;
-    text-align: center;
-    background-color: #fff;
+
+  /* Container for the entire page content */
+.home-container {
+    max-width: 1200px;
+    margin: 0 auto;
     padding: 20px;
+    background-color: #f9f9f9;
     border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  h1 {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: 'Arial', sans-serif;
+}
+
+.home-container h1 {
+    font-size: 2.5em;
     color: #007BFF;
-  }
-  
-  .subject-selection {
-    margin: 20px 0;
-  }
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.home-container p {
+    font-size: 1.1em;
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+/* Section specific styling */
+.section, .challenge, .Next\ Steps {
+    padding: 20px;
+    background-color: #ffffff;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.section h2, .challenge h2, .Next\ Steps h2 {
+    font-size: 1.8em;
+    color: #222;
+    margin-bottom: 10px;
+}
+
+.challenge p, .section p, .Next\ Steps p {
+    font-size: 1em;
+    color: #444;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .home-container {
+        padding: 15px;
+    }
+    
+    .home-container h1 {
+        font-size: 2em;
+    }
+    
+    .section, .challenge, .Next\ Steps {
+        padding: 15px;
+    }
+}
+
   
