@@ -1,79 +1,89 @@
 from flask import Flask, render_template, request, redirect, url_for
+import db  # Import the db module
+from db import create_problem, get_problems
 
-app = Flask(__name__)
+# Constants for problem difficulty
+DIFFICULTY_EASY = 'easy'
+DIFFICULTY_MEDIUM = 'medium'
+DIFFICULTY_HARD = 'hard'
 
-@app.route('/')
-def home():
-    return render_template('home.html')
+# Constants for titles
+TITLE_MEDIUM = 'MEDIUM problems'
+TITLE_HARD = 'HARD problems'
 
-@app.route('/about')
-def about():
-    return render_template('about.html')
 
-@app.route('/play')
-def play():
-    return render_template('play.html')
+def create_app():
+    app = Flask(__name__)
+    app.config.from_mapping(
+        DATABASE="instance/problems.sqlite",  # Ensure the path is correct
+    )
 
-@app.route('/tutorial')
-def tutorial():
-    return render_template('tutorial.html')
+    # Initialize the database
+    db.init_app(app)
 
-@app.route('/create', methods=['GET', 'POST'])  # Allow GET and POST methods
-def create():
-    if request.method == 'POST':
-        # Handle the form data for creating the questions
-        # Here you can process the title or other inputs if needed
-
-        # Redirect to the mq page after creating
-        return redirect(url_for('mq'))  # Redirect to /mq
-    
-    return render_template('create.html')  # Render template for GET requests
-
-@app.route('/mq', methods=['GET', 'POST'])  # Allow GET and POST methods
-def mq():
-    if request.method == 'POST':
-        # Handle the form data
-        title = request.form['title']
+    # Utility function to extract questions and answers from the form
+    def extract_questions_and_answers(form):
         questions = []
         answers = []
-        
-        # Loop through questions and answers
-        for i in range(1, (len(request.form) // 2) + 1):  
-            questions.append(request.form.get(f'question{i}'))
-            answers.append(request.form.get(f'answer{i}'))
-        
-        # Process the data (e.g., save to database)
-        print("Title:", title)
-        print("Questions:", questions)
-        print("Answers:", answers)
-        
-        # Redirect to the HQ route after processing
-        return redirect(url_for('mq'))  # Change this to redirect to /hq
-        
-    return render_template('mq.html')  # Render template for GET requests
+        for i in range(1, (len(form) // 2) + 1):
+            questions.append(form.get(f'question{i}'))
+            answers.append(form.get(f'answer{i}'))
+        return questions, answers
 
-@app.route('/hq', methods=['GET', 'POST'])  # Allow GET and POST methods
-def hq():
-    if request.method == 'POST':
-        # Handle the form data
-        title = request.form['title']
-        questions = []
-        answers = []
-        
-        # Loop through questions and answers
-        for i in range(1, (len(request.form) // 2) + 1):  
-            questions.append(request.form.get(f'question{i}'))
-            answers.append(request.form.get(f'answer{i}'))
-        
-        # Process the data (e.g., save to database)
-        print("Title:", title)
-        print("Questions:", questions)
-        print("Answers:", answers)
-        
-        # Redirect to some route after processing (adjust if needed)
-        return redirect(url_for('hq'))  # Redirect to /play after submitting HQ
-    
-    return render_template('hq.html')  # Render template for GET requests
+    # Utility function to handle problem creation
+    def create_problems(title, difficulty):
+        questions, answers = extract_questions_and_answers(request.form)
+        for question, answer in zip(questions, answers):
+            create_problem(title, question, answer, difficulty)
+
+    @app.route('/')
+    def home():
+        return render_template('home.html')
+
+    @app.route('/about')
+    def about():
+        return render_template('about.html')
+
+    @app.route('/play')
+    def play():
+        return render_template('play.html')
+
+    @app.route('/tutorial')
+    def tutorial():
+        return render_template('tutorial.html')
+
+    @app.route('/create', methods=['GET', 'POST'])
+    def create():
+        if request.method == 'POST':
+            title = request.form['title']
+            # Assuming you want to handle easy problems here
+            create_problems(title, DIFFICULTY_EASY)
+            return redirect(url_for('mq'))  # Redirect to /mq after creation
+        return render_template('create.html')
+
+    @app.route('/mq', methods=['GET', 'POST'])
+    def mq():
+        if request.method == 'POST':
+            create_problems(TITLE_MEDIUM, DIFFICULTY_MEDIUM)
+            return redirect(url_for('hq'))  # Redirect after processing
+        return render_template('mq.html')  # Render template for GET request
+
+    @app.route('/hq', methods=['GET', 'POST'])
+    def hq():
+        if request.method == 'POST':
+            create_problems(TITLE_HARD, DIFFICULTY_HARD)
+            return redirect(url_for('problems'))  # Redirect after processing
+        return render_template('hq.html')  # Render template for GET requests
+
+    # Route for displaying problems
+    @app.route('/problems')
+    def problems():
+        problems = get_problems()  # Fetch problems from the database
+        return render_template('problems.html', problems=problems)
+
+    return app
+
 
 if __name__ == '__main__':
+    app = create_app()
     app.run(debug=True)

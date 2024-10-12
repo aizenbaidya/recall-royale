@@ -1,22 +1,20 @@
 {% extends 'base.html' %}
 
 {% block head %}
-<title>Create Database</title>
+<title>Create Medium Problems</title>
 {% endblock %}
 
 {% block body %}
 
-
-<form id="qaForm" action="/hq">
-    
+<form id="qaForm" action="/mq" method="POST">
     <div id="qaContainer">
         <br>
         <h2>Medium Questions and Answers</h2>
         <div class="question-answer">
             <label for="question1">Question 1:</label>
-            <input type="text" id="question1" name="question1">
+            <input type="text" id="question1" name="question1" required>
             <label for="answer1">Answer:</label>
-            <input type="text" id="answer1" name="answer1">
+            <input type="text" id="answer1" name="answer1" required>
         </div>
     </div>
     <br>
@@ -43,6 +41,7 @@
         questionInput.setAttribute('type', 'text');
         questionInput.setAttribute('id', `question${questionCount}`);
         questionInput.setAttribute('name', `question${questionCount}`);
+        questionInput.setAttribute('required', true);
 
         // Add Answer label and input
         const answerLabel = document.createElement('label');
@@ -53,6 +52,7 @@
         answerInput.setAttribute('type', 'text');
         answerInput.setAttribute('id', `answer${questionCount}`);
         answerInput.setAttribute('name', `answer${questionCount}`);
+        answerInput.setAttribute('required', true);
 
         // Append everything to the div
         qaDiv.appendChild(questionLabel);
@@ -65,4 +65,5 @@
         qaContainer.appendChild(qaDiv);
     }
 </script>
+
 {% endblock %}
