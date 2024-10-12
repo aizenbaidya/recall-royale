@@ -48,3 +48,16 @@ def get_problems():
     db = get_db()
     problems = db.execute('SELECT * FROM PROBLEMS').fetchall()
     return problems
+
+# Function to create a new SQLite database
+def create_database_table(db_name):
+    conn = sqlite3.connect(db_name)
+    # Example: Create a sample table
+    conn.execute('''
+        CREATE TABLE IF NOT EXISTS users (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            name TEXT NOT NULL,
+            email TEXT NOT NULL UNIQUE
+        );
+    ''')
+    conn.close()
