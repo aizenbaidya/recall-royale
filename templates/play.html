@@ -8,12 +8,13 @@
 {% block body %}
 <div class="flashcard">
     <div class="flashcard-inner" id="flashcard">
-        
+        <p>Selected Subject: {{ subject }}</p>
+
         <div class="flashcard-front">
-            1+1
+            <span id="current-problem">{{ problems[0] }}</span>
         </div>
-        <div class="flashcard-back">
-            2
+        <div class="flashcard-back" id="current-answer" style="display: none;">
+            {{ answers[0] }}
         </div>
     </div>
 </div>
@@ -21,14 +22,63 @@
 <div class="input">
     <label for="input"> Answer:</label>
     <input type="text" id="answer" placeholder="Enter your Answer">
-    <button onclick="flipCard()">Check Answer</button>
-
-    <script>
-        function flipCard() {
-            var card = document.getElementById('flashcard');
-            card.classList.toggle('flipped');
-        }
-    </script>
+    <button id="check-answer-button">Check Answer</button>
 </div>
 
+<script>
+   
+    const problems = [
+        {% for problem in problems %}
+            "{{ problem }}"{% if not loop.last %},{% endif %}
+        {% endfor %}
+    ];
+
+    const answers = [
+        {% for answer in answers %}
+            "{{ answer }}"{% if not loop.last %},{% endif %}
+        {% endfor %}
+    ];
+
+    let currentIndex = 0;
+
+    document.getElementById('check-answer-button').onclick = function() {
+      
+        const userAnswer = document.getElementById('answer').value.trim();
+        const correctAnswer = answers[currentIndex].trim();
+
+       
+        if (userAnswer.toLowerCase() === correctAnswer.toLowerCase()) {
+            flipCard();
+
+            setTimeout(nextQuestion, 1000);
+        } else {
+            alert('Incorrect answer. Please try again!');
+        }
+    };
+
+    function flipCard() {
+        const card = document.getElementById('flashcard');
+        const answerDiv = document.getElementById('current-answer');
+
+       
+        card.classList.toggle('flipped');
+        answerDiv.style.display = answerDiv.style.display === 'none' ? 'block' : 'none';
+    }
+
+    function nextQuestion() {
+        currentIndex++;
+
+        if (currentIndex < problems.length) {
+            document.getElementById('current-problem').textContent = problems[currentIndex];
+            document.getElementById('current-answer').textContent = answers[currentIndex];
+            document.getElementById('current-answer').style.display = 'none'; 
+            document.getElementById('answer').value = '';
+            const card = document.getElementById('flashcard');
+            card.classList.remove('flipped');
+        } else {
+           
+            window.location.href = '/';
+        }
+    }
+</script>
 {% endblock %}
