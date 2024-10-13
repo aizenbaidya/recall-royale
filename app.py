@@ -68,7 +68,7 @@ def create_app():
     def hq():
         if request.method == 'POST':
             create_problems(DIFFICULTY_HARD)
-            return redirect(url_for('problems'))
+            return redirect(url_for('home'))
 
         return render_template('hq.html')
 
