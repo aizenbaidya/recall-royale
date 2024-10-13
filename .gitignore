@@ -5,4 +5,4 @@ __pycache__/
 .vscode/
 
 # Database file
-instance/app_database.db
+# instance/app_database.db
