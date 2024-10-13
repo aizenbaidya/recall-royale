@@ -17,8 +17,7 @@
             <input type="text" id="question1" name="question1" required>
             <label for="answer1">Answer:</label>
             <input type="text" id="answer1" name="answer1" required>
-            <label for="hint1">Hint:</label> <!-- New Hint Label -->
-            <input type="text" id="hint1" name="hint1" required> <!-- New Hint Input -->
+            
         </div>
     </div>
     <br>
@@ -57,23 +56,13 @@
         answerInput.setAttribute('name', `answer${questionCount}`);
         answerInput.setAttribute('required', true);
 
-        const hintLabel = document.createElement('label'); // New hint label
-        hintLabel.setAttribute('for', `hint${questionCount}`);
-        hintLabel.innerText = ' Hint:'; // New hint text
-
-        const hintInput = document.createElement('input'); // New hint input
-        hintInput.setAttribute('type', 'text');
-        hintInput.setAttribute('id', `hint${questionCount}`);
-        hintInput.setAttribute('name', `hint${questionCount}`);
-        hintInput.setAttribute('required', true); // Add required attribute
-
+       
 
         qaDiv.appendChild(questionLabel);
         qaDiv.appendChild(questionInput);
         qaDiv.appendChild(answerLabel);
         qaDiv.appendChild(answerInput);
-        qaDiv.appendChild(hintLabel); // Append hint label
-        qaDiv.appendChild(hintInput); // Append hint input
+        
 
  
         const qaContainer = document.getElementById('qaContainer');
