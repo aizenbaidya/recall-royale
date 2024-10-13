@@ -1,19 +1,24 @@
-{% extends 'base.html' %}
-
-{% block head %}
+{% extends 'base.html' %} {% block head %}
 <title>Recall Royale</title>
-<link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
-{% endblock %}
-
-{% block body %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}" />
+{% endblock %} {% block body %}
 <div class="container mt-4">
-    <h1>Welcome to the Recall Royale!</h1>
+    <h1>Welcome to <strong>Recall Royale</strong>!</h1>
+    <hr />
     <p>Choose between different card sets!</p>
+    <p>Master new skills, one card at a time!</p>
+    <p>Pick a subject, play, and learn!</p>
+    <hr />
 
-    <h2>About the Project</h2>
-    <p><strong>Recall Royale</strong> is an interactive platform that transforms learning into an engaging experience.
-        It's designed to support diverse subjects, allowing users to create and share their own content. This
-        open-source project invites collaboration, encouraging a community-driven approach to education. Have fun!</p>
+    <p>
+        <strong>Recall Royale</strong> is an interactive platform that transforms
+        learning into an engaging experience. It's designed to support diverse
+        subjects, allowing users to create and share their own content. This
+        open-source project invites collaboration, encouraging a community-driven
+        approach to education. Have fun leveling up your learning!
+    </p>
+
+    <hr />
 
     <div class="subject-selection">
         <label for="Dataset">Select a Subject:</label>
@@ -25,14 +30,15 @@
     </div>
 
     <div class="button-container">
-        <button onclick="startGame()">Start Game</button>
-        <button onclick="window.location.href='/create';">Create Dataset</button>
+        <button onclick="startGame()"><i class="bi bi-controller"></i>&nbsp;Start Game</button>
+        <button onclick="window.location.href='/create';"><i class="bi bi-table"></i>&nbsp;Create Dataset</button>
     </div>
 
     <script>
         function startGame() {
-            const subject = document.getElementById('subjects').value;
+            const subject = document.getElementById("subjects").value;
             window.location.href = `/play?subject=${encodeURIComponent(subject)}`;
         }
     </script>
-{% endblock %}
+    {% endblock %}
+</div>

@@ -67,11 +67,14 @@ body, html {
 
 .flashcard-front {
     background-color: #2a9d8f;
+    text-align: center;
 }
 
 .flashcard-back {
     background-color: #e76f51;
     transform: rotateY(180deg);
+    text-align: center;
+    align-items: center;
 }
 
 .flipped {
