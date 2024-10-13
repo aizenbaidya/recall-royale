@@ -1,13 +1,16 @@
-body, html {
+/* body, html {
     height: 100%;
     margin: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: #f4f4f9;
-}
+} */
+
+
 
 .container {
+    height: 85vh; /* Full viewport height */
     display: flex;
     flex-direction: column;
     justify-content: center;

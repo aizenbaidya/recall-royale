@@ -6,80 +6,81 @@
 {% endblock %}
 
 {% block body %}
+<div class="container">
+    <div class="flashcard">
+        <div class="flashcard-inner" id="flashcard">
+            <p>Selected Subject: {{ subject }}</p>
 
-<div class="flashcard">
-    <div class="flashcard-inner" id="flashcard">
-        <p>Selected Subject: {{ subject }}</p>
+            <div class="flashcard-front">
+                <span id="current-problem">{{ problems[0] }}</span>
+            </div>
+            <div class="flashcard-back" id="current-answer" style="display: none;">
+                <div class="answer-content" id="answer-content">{{ answers[0] }}</div>
+            </div>
 
-        <div class="flashcard-front">
-            <span id="current-problem">{{ problems[0] }}</span>
         </div>
-        <div class="flashcard-back" id="current-answer" style="display: none;">
-            <div class="answer-content" id="answer-content">{{ answers[0] }}</div>
-        </div>
-        
     </div>
-</div>
 
-<div class="input">
-    <label for="input"> Answer:</label>
-    <input type="text" id="answer" placeholder="Enter your Answer">
-    <button id="check-answer-button">Check Answer</button>
-</div>
+    <div class="input mt-4">
+        <!-- <label for="input">Answer:</label> -->
+        <input type="text" id="answer" placeholder="Enter your answer">
+        <button class="btn btn-warning" id="check-answer-button"><i class="bi bi-patch-question"></i>&nbsp;Check Answer</button>
+    </div>
 
-<!-- Hint Container -->
-<div class="hint-container" style="display: none;">
-    <button id="hint-button">Show Hint</button>
-    <div id="hint" style="display: none; margin-top: 10px;"></div>
+    <!-- Hint Container -->
+    <div class="hint-container" style="display: none;">
+        <button id="hint-button">Show Hint</button>
+        <div id="hint" style="display: none; margin-top: 10px;"></div>
+    </div>
 </div>
 
 <script>
     let incorrectAttempts = 0; // Track incorrect attempts
 
-document.getElementById('check-answer-button').onclick = function() {
-    const userAnswer = document.getElementById('answer').value.trim();
-    const correctAnswer = answers[currentIndex].trim();
+    document.getElementById('check-answer-button').onclick = function () {
+        const userAnswer = document.getElementById('answer').value.trim();
+        const correctAnswer = answers[currentIndex].trim();
 
-    if (userAnswer.toLowerCase() === correctAnswer.toLowerCase()) {
-        flipCard();
-        setTimeout(nextQuestion, 1000);
-        incorrectAttempts = 0; // Reset incorrect attempts on correct answer
-    } else {
-        incorrectAttempts++;
-        alert('Incorrect answer. Please try again!');
-    }
-};
+        if (userAnswer.toLowerCase() === correctAnswer.toLowerCase()) {
+            flipCard();
+            setTimeout(nextQuestion, 1000);
+            incorrectAttempts = 0; // Reset incorrect attempts on correct answer
+        } else {
+            incorrectAttempts++;
+            alert('Incorrect answer. Please try again!');
+        }
+    };
 
-// Show hint when the button is clicked
-document.getElementById('hint-button').onclick = function() {
-    const hintDiv = document.getElementById('hint');
-    hintDiv.textContent = hints[currentIndex]; // Display the current hint
-    hintDiv.style.display = 'block'; // Show the hint
-};
+    // Show hint when the button is clicked
+    document.getElementById('hint-button').onclick = function () {
+        const hintDiv = document.getElementById('hint');
+        hintDiv.textContent = hints[currentIndex]; // Display the current hint
+        hintDiv.style.display = 'block'; // Show the hint
+    };
 
-    
 
-   
+
+
     const problems = [
         {% for problem in problems %}
-            "{{ problem }}"{% if not loop.last %},{% endif %}
-        {% endfor %}
+    "{{ problem }}"{% if not loop.last %}, {% endif %}
+    {% endfor %}
     ];
 
     const answers = [
         {% for answer in answers %}
-            "{{ answer }}"{% if not loop.last %},{% endif %}
-        {% endfor %}
+    "{{ answer }}"{% if not loop.last %}, {% endif %}
+    {% endfor %}
     ];
 
     let currentIndex = 0;
 
-    document.getElementById('check-answer-button').onclick = function() {
-      
+    document.getElementById('check-answer-button').onclick = function () {
+
         const userAnswer = document.getElementById('answer').value.trim();
         const correctAnswer = answers[currentIndex].trim();
 
-       
+
         if (userAnswer.toLowerCase() === correctAnswer.toLowerCase()) {
             flipCard();
 
@@ -93,24 +94,24 @@ document.getElementById('hint-button').onclick = function() {
         const card = document.getElementById('flashcard');
         const answerDiv = document.getElementById('current-answer');
 
-       
+
         card.classList.toggle('flipped');
         answerDiv.style.display = answerDiv.style.display === 'none' ? 'block' : 'none';
     }
 
     function nextQuestion() {
         currentIndex++;
-        
+
         if (currentIndex < problems.length) {
             document.getElementById('current-problem').textContent = problems[currentIndex];
             document.getElementById('answer-content').textContent = answers[currentIndex]; // Update this line
-            document.getElementById('current-answer').style.display = 'none'; 
+            document.getElementById('current-answer').style.display = 'none';
             document.getElementById('answer').value = '';
-    
+
             // Reset the card to ensure it's centered
             const card = document.getElementById('flashcard');
             card.classList.remove('flipped');
-    
+
             // Ensure both front and back are hidden initially
             document.getElementById('current-answer').style.display = 'none';
             document.getElementById('current-problem').style.display = 'flex'; // Ensure it stays centered
@@ -118,7 +119,7 @@ document.getElementById('hint-button').onclick = function() {
             window.location.href = '/';
         }
     }
-    
-    
+
+
 </script>
 {% endblock %}
