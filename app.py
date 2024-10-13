@@ -1,12 +1,12 @@
 from flask import Flask, render_template, request, redirect, url_for, g
 import db
-from db import create_problem, create_database_table, get_all_tables, get_problems_from_table
+from db import create_problem, create_database_table, get_all_tables, get_problems_from_table, get_db
 
 DIFFICULTY_EASY = 'easy'
 DIFFICULTY_MEDIUM = 'medium'
 DIFFICULTY_HARD = 'hard'
 
-# Global variable to store the table name
+
 current_table_name = None
 
 def create_app():
@@ -26,8 +26,7 @@ def create_app():
         return questions, answers
 
     def create_problems(difficulty):
-        global current_table_name  # Use the global variable
-
+        global current_table_name 
         if not current_table_name:
             print("Table name not set!")
             return redirect(url_for('create'))
@@ -45,12 +44,12 @@ def create_app():
 
     @app.route('/create', methods=['GET', 'POST'])
     def create():
-        global current_table_name  # Declare the global variable
+        global current_table_name
 
         if request.method == 'POST':
             title = request.form['title']
-            current_table_name = title.replace(" ", "_").replace("-", "_")  # Set the global variable for the current table
-            create_database_table(title)  # Create the database table
+            current_table_name = title.replace(" ", "_").replace("-", "_")
+            create_database_table(title) 
             create_problems(DIFFICULTY_EASY)
 
             return redirect(url_for('mq'))
@@ -73,10 +72,29 @@ def create_app():
 
         return render_template('hq.html')
 
+    
+
     @app.route('/play')
     def play():
-        return render_template('play.html') 
+        subject = request.args.get('subject')
+        db = get_db()
+        if subject:  
+            try:
+                query = f"SELECT question FROM {subject}"
+                results = db.execute(query).fetchall()  
+                problems = [row[0] for row in results] 
 
+                query2 = f"SELECT answer FROM {subject}"
+                results2 = db.execute(query2).fetchall()
+                answers = [row[0] for row in results2]
+
+            except Exception as e:
+                return f"Error accessing table {subject}: {e}"
+            
+            return render_template('play.html', subject=subject, problems=problems, answers=answers)
+        else:
+            return "No subject selected!"
+    
     @app.route('/tutorial')
     def tutorial():
         return render_template('tutorial.html') 
@@ -94,9 +112,9 @@ def create_app():
             problems = get_problems_from_table(table)
             problems_by_table[table] = [
                 {
-                    'question': problem['QUESTION'],
-                    'answer': problem['ANSWER'],
-                    'difficulty': problem['DIFFICULTY']
+                    'question': problem['question'],
+                    'answer': problem['answer'],
+                    'difficulty': problem['difficulty']
                 }
                 for problem in problems
             ]
