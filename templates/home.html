@@ -2,7 +2,7 @@
 
 {% block head %}
 <title>Recall Royale</title>
-<link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}"> 
+<link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
 {% endblock %}
 
 {% block body %}
@@ -18,10 +18,9 @@
     <div class="subject-selection">
         <label for="Dataset">Select a Subject:</label>
         <select id="subjects">
-            <option value="math">Math</option>
-            <option value="science">Science</option>
-            <option value="history">History</option>
-            <option value="language">Language</option>
+            {% for table in tables %}
+            <option value="{{ table }}">{{ table }}</option>
+            {% endfor %}
         </select>
     </div>
 
