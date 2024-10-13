@@ -2,10 +2,23 @@
 
 {% block head %}
 <title>Tutorial</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/tutorial.css') }}">
 {% endblock %}
 
 {% block body %}
 <div class="container">
     <h1>Welcome to the TUTORIAL Page</h1>
+    <p>This section is here to help guide you in understanding our flashcard game better for maximum fun and learning!</p>
+    <br>
+    <div class="introduction">
+        <h2>How It Works</h2>
+        <p>For the easy level, you will be given a simple problem for the subject you have selected. You will be provided an area where you can type out what you think the best answer is. If you get it correct, you move on to the next problem and a point to move on to the medium level. If not, then you won't get any additional points.</p>
+        <p>Once you've mastered enough problems from the easy level, you move on to the medium level which will be more advanced than the previous level. The same rules will apply for this level just as they did for the previous one.</p>
+        <p>After the medium level is mastered, you've moved on to the hard and final level. These questions will give you much more of a challenge. After unlocking mastery for this level, you will have mastered that specific subject, which means you're one step closer to mastering all of the selective subjects.</p>
+    </div>
+    <br>
+    <div class="conclusion">
+        <h1>Don't forget to have fun!</h1>
+    </div>
 </div>
 {% endblock %}
