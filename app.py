@@ -40,7 +40,8 @@ def create_app():
 
     @app.route('/')
     def home():
-        return render_template('home.html')
+        tables = get_all_tables()
+        return render_template('home.html', tables=tables)
 
     @app.route('/create', methods=['GET', 'POST'])
     def create():
